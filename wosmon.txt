@@ -18,12 +18,11 @@ ACIA_CMD    = $5002
 ACIA_CTRL   = $5003
 
 RESET:
-		CLD
-		CLI
-		LDA     #$1d           ; 8-N-1, 7200 baud.
+		LDA     #$1D           ; 8-N-1, 7200 baud.
                 STA     ACIA_CTRL
-                LDY     #$8B           ; No parity, no echo, no interrupts.
+                LDY     #$8B           ; No parity, no echo, no interrupts. (top bit set per video)
                 STY     ACIA_CMD
+		LDA     #$1B           ; Begin with escape.
                 
 
 NOTCR:
